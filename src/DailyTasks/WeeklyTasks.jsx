@@ -53,7 +53,7 @@ function WeeklyTasks() {
   );
 
   return (
-    <div className="p-4">
+    <div className="p-4 bg-gray-100">
       <div className="flex justify-between items-center mb-4">
         <button onClick={handlePrevWeek} className="text-blue-500 p-2">
           <FaChevronLeft size={20} />
@@ -63,26 +63,36 @@ function WeeklyTasks() {
         </button>
       </div>
 
-      <div className="grid grid-cols-7 gap-2 mb-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2 mb-4">
         {daysOfWeek.map((day, index) => (
           <div
             key={index}
             className={`border p-2 rounded-lg text-center ${
               isSameDay(day, currentDate)
-                ? "bg-[#5200FF] border-blue-500"
-                : "bg-white border-gray-300"
+                ? "bg-[#5200FF] text-white"
+                : "bg-white text-gray-600"
             }`}
           >
-            <div className="font-semibold text-gray-600">
+            <div
+              className={`font-semibold ${
+                isSameDay(day, currentDate) ? "text-white" : "text-gray-600"
+              }`}
+            >
               {format(day, "EEEE")}
             </div>
-            <div className="text-sm text-gray-500">{format(day, "dd.MM")}</div>
+            <div
+              className={`text-sm ${
+                isSameDay(day, currentDate) ? "text-white" : "text-gray-600"
+              }`}
+            >
+              {format(day, "dd.MM")}
+            </div>
           </div>
         ))}
       </div>
 
-      <div className="flex justify-between space-x-4 p-4 bg-gray-50 rounded-lg shadow-md">
-        {["todo", "inProgress", "done"].map((status, index) => (
+      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 p-4 bg-gray-50 rounded-lg shadow-md">
+        {["todo", "inProgress", "done"].map((status) => (
           <div
             key={status}
             className="flex-1 bg-white p-4 rounded-lg shadow-md border border-gray-300"

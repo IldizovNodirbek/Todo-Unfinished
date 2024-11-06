@@ -8,8 +8,8 @@ import {
   startOfMonth,
   getDaysInMonth,
   addDays as dateFnsAddDays,
+  isSameDay,
 } from "date-fns";
-
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
@@ -55,10 +55,8 @@ function MonthlyTasks() {
     setShowMenu(null);
   };
 
-  // Current month start date and day count
   const startOfCurrentMonth = startOfMonth(currentDate);
   const daysInMonth = getDaysInMonth(currentDate);
-
   const daysOfMonth = Array.from({ length: daysInMonth }, (_, i) =>
     dateFnsAddDays(startOfCurrentMonth, i)
   );
@@ -76,25 +74,27 @@ function MonthlyTasks() {
           <FaChevronRight size={20} />
         </button>
       </div>
-
-      <div className="grid grid-cols-7 gap-2 mb-4">
+      
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 mb-4">
         {daysOfMonth.map((day, index) => (
           <div
             key={index}
-            className="border p-2 rounded-lg text-center bg-white border-gray-300"
+            className={`border p-2 rounded-lg text-center ${
+              isSameDay(day, currentDate)
+                ? "bg-[#5200FF] text-white"
+                : "bg-white text-gray-600"
+            }`}
           >
-            <div className="text-sm font-semibold text-gray-600">
-              {format(day, "dd.MM")}
-            </div>
+            <div className="text-sm font-semibold">{format(day, "dd.MM")}</div>
           </div>
         ))}
       </div>
-
-      <div className="flex justify-between space-x-4 p-4 bg-gray-50 rounded-lg shadow-md">
-        {["todo", "inProgress", "done"].map((status, index) => (
+     
+      <div className="flex flex-col sm:flex-row justify-between space-x-0 sm:space-x-4 p-4 bg-gray-50 rounded-lg shadow-md">
+        {["todo", "inProgress", "done"].map((status) => (
           <div
             key={status}
-            className="flex-1 bg-white p-4 rounded-lg shadow-md border border-gray-300"
+            className="flex-1 bg-white p-4 rounded-lg shadow-md border border-gray-300 mt-4 sm:mt-0"
           >
             <div
               className={`text-lg font-bold text-center mb-2 ${

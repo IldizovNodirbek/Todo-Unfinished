@@ -7,7 +7,6 @@ function TodayTask() {
   const [showMenu, setShowMenu] = useState(null);
   const [todayDate, setTodayDate] = useState("");
 
-  // Correctly select todayTasks from the Redux store
   const tasks = useSelector((state) => state.tasks.todayTasks);
   const dispatch = useDispatch();
 
@@ -43,16 +42,16 @@ function TodayTask() {
   };
 
   return (
-    <div className="flex flex-col items-center p-4 bg-gray-100 min-h-screen">
-      <div className="bg-blue-600 text-white text-2xl font-semibold px-6 py-3 rounded-lg shadow-lg mb-6">
+    <div className="flex flex-col items-center p-4 bg-gray-100">
+      <div className="bg-[#5200FF] text-white text-2xl font-semibold lg:px-80 md:px-40 sm:px-6 py-3 rounded-lg shadow-lg mb-6 text-center">
         {todayDate}
       </div>
 
-      <div className="flex space-x-4 w-full max-w-4xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl">
         {["todo", "inProgress", "done"].map((status) => (
           <div
             key={status}
-            className="border border-gray-300 rounded-lg p-4 w-full bg-white shadow-md"
+            className="border border-gray-300 rounded-lg p-4 w-full bg-white shadow-md flex flex-col"
           >
             <div className="flex justify-between items-center mb-2">
               <h2
@@ -124,19 +123,19 @@ function TodayTask() {
 
             {status === "todo" && (
               <div className="mt-4">
-                <button
-                  onClick={handleAddTask}
-                  className="text-blue-500 font-semibold"
-                >
-                  + add task
-                </button>
                 <input
                   type="text"
                   value={newTask}
                   onChange={(e) => setNewTask(e.target.value)}
                   placeholder="Add a new task"
-                  className="border-b-2 border-blue-500 outline-none mt-2 w-full p-1 text-gray-700"
+                  className="border-b-2 border-blue-500 outline-none w-full p-1 text-gray-700"
                 />
+                <button
+                  onClick={handleAddTask}
+                  className="text-blue-500 font-semibold mt-2"
+                >
+                  + add task
+                </button>
               </div>
             )}
           </div>

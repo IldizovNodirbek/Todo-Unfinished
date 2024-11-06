@@ -7,7 +7,7 @@ function TodoList({ section, tasks, onAddTask }) {
   const dispatch = useDispatch();
   const [newTask, setNewTask] = useState("");
   const [isAdding, setIsAdding] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(null); // Indexni ushlab turish uchun null qiymat
+  const [menuOpen, setMenuOpen] = useState(null); 
 
   const handleAddTask = () => {
     if (newTask.trim()) {
@@ -19,11 +19,11 @@ function TodoList({ section, tasks, onAddTask }) {
 
   const handleMoveTask = (index, to) => {
     dispatch(changeStatus({ section, from: "todo", to, index }));
-    setMenuOpen(null); // Menyuni yopish
+    setMenuOpen(null); 
   };
 
   const handleEditTask = (index, task) => {
-    const updatedTask = prompt("Edit task:", task); // Yangi nom kiritish
+    const updatedTask = prompt("Edit task:", task);
     if (updatedTask && updatedTask.trim()) {
       dispatch(editTask({ section, index, updatedTask }));
     }

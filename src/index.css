@@ -14,3 +14,20 @@
 .animate-fade-in {
   animation: fade-in 0.3s ease-out;
 }
+
+
+@keyframes pulse {  
+  0% {  
+    border-color: rgba(255, 0, 0, 0.767);  
+  }  
+  50% {  
+    border-color: rgba(0, 128, 0, 0.703);  
+  }  
+  100% {  
+    border-color: rgba(255, 255, 0, 0.878);  
+  }  
+}  
+
+.animation-pulse {  
+  animation: pulse 3.5s infinite;  
+}
